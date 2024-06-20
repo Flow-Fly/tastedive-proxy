@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const axios = require("axios")
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -14,4 +15,35 @@ router.get("/", async function (req, res, next) {
 	}
 })
 
+router.get("/autocomplete", async (req, res, next) => {
+	try {
+		const url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+		const params = new URLSearchParams(req.query)
+		const response = await axios.get(url, { params })
+		res.json(response.data)
+	} catch (error) {
+		res.json(error.message)
+	}
+})
+router.get("/details", async (req, res, next) => {
+	try {
+		const url = "https://maps.googleapis.com/maps/api/place/details/json"
+		const params = new URLSearchParams(req.query)
+		const response = await axios.get(url, { params })
+		res.json(response.data)
+	} catch (error) {
+		res.json(error.message)
+	}
+})
+
+router.get("/photos", async (req, res, next) => {
+	try {
+		const url = "https://maps.googleapis.com/maps/api/place/photo"
+		const params = new URLSearchParams(req.query)
+		const response = await axios.get(url, { params })
+		res.json(response.data)
+	} catch (error) {
+		res.json(error.message)
+	}
+})
 module.exports = router
