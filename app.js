@@ -11,11 +11,11 @@ const limiter = rateLimit({
 })
 
 // Apply the rate limiting middleware to all requests.
-app.use(limiter)
 
 const indexRouter = require("./routes/index")
 
 const app = express()
+app.use(limiter)
 app.use(cors())
 app.use(logger("dev"))
 app.use(express.json())
