@@ -24,6 +24,15 @@ router.get("/wikiart", async function (req, res, next) {
 		res.json(error.message)
 	}
 })
+router.get("/paintings/:id", async function (req, res, next) {
+	try {
+		let url = `http://www.wikiart.org/en/App/Painting/ImageJson/`
+		const response = await axios.get(url + req.params.id)
+		res.json(response.data)
+	} catch (error) {
+		res.json(error.message)
+	}
+})
 
 router.get("/autocomplete", async (req, res, next) => {
 	try {
